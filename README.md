@@ -1,10 +1,17 @@
 # MWAD_EX05_image-carousel-in-react
+
+```
+NAME: V. POOJAA SREE
+REG. NO: 212223040147
+
+```
+
 ## Date:
 
-## AIM
+## AIM:
 To create a Image Carousel using React 
 
-## ALGORITHM
+## ALGORITHM:
 ### STEP 1 Initial Setup:
 Input: A list of images to display in the carousel.
 
@@ -38,11 +45,104 @@ Use setInterval to call the nextImage() function at regular intervals.
 
 Clean up the interval when the component unmounts using clearInterval to prevent memory leaks.
 
-## PROGRAM
+## PROGRAM:
+
+```
+App.jsx
+
+import React, { useState, useEffect } from 'react';
+
+import img1 from './assets/img1.jpg';
+import img2 from './assets/img2.jpg';
+import img3 from './assets/img3.jpg';
+
+const images = [img1, img2, img3];
+
+function App() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextImage = () => {
+    setCurrentIndex((currentIndex + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((currentIndex - 1 + images.length) % images.length);
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      nextImage();
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [currentIndex]);
+
+  return (
+    <div style={{ textAlign: 'center', maxWidth: 600, margin: 'auto' }}>
+      <h2>React Image Carousel</h2>
+      <div style={{ position: 'relative' }}>
+        <img
+          src={images[currentIndex]}
+          alt={`Slide ${currentIndex}`}
+          style={{ width: '100%', height: 'auto', borderRadius: 8 }}
+        />
+        <button
+          onClick={prevImage}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: 10,
+            transform: 'translateY(-50%)',
+            fontSize: '1.5rem',
+            backgroundColor: 'rgba(255,255,255,0.7)',
+            border: 'none',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            padding: '0.5rem 1rem',
+          }}
+          aria-label="Previous Image"
+        >
+          &#8592;
+        </button>
+        <button
+          onClick={nextImage}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: 10,
+            transform: 'translateY(-50%)',
+            fontSize: '1.5rem',
+            backgroundColor: 'rgba(255,255,255,0.7)',
+            border: 'none',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            padding: '0.5rem 1rem',
+          }}
+          aria-label="Next Image"
+        >
+          &#8594;
+        </button>
+      </div>
+      <p>
+        Image {currentIndex + 1} of {images.length}
+      </p>
+    </div>
+  );
+}
+
+export default App;
+
+```
 
 
-## OUTPUT
+## OUTPUT:
+
+![o1](https://github.com/user-attachments/assets/3897b85f-4fba-4ef0-94c8-b9b87a68c723)
+
+![o2](https://github.com/user-attachments/assets/9706b631-9306-4dcc-9fbc-1fcaa74bffb1)
+
+![o3](https://github.com/user-attachments/assets/6dce9cef-8693-4218-b9c0-ad6bb701039e)
 
 
-## RESULT
+## RESULT:
 The program for creating Image Carousel using React is executed successfully.
